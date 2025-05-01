@@ -1,32 +1,37 @@
-# Mintlify Starter Kit
+<p align="center">
+  <img src="./logo/simple.png" alt="Logo do SimpleAPI" height="200"/>
+</p>
 
-Click on `Use this template` to copy the Mintlify starter kit. The starter kit contains examples including
+**simpleAPI** é uma plataforma moderna de autenticação de usuários, projetada para desenvolvedores que buscam integrar login seguro, autenticação em dois fatores (2FA) e gestão de usuários com facilidade e agilidade.
 
-- Guide pages
-- Navigation
-- Customizations
-- API Reference pages
-- Use of popular components
+Com APIs claras, documentação objetiva e uma experiência pensada para escalar, o simpleAPI oferece uma base sólida para aplicações modernas — seja para produtos SaaS, aplicativos mobile ou sistemas corporativos.
 
-### Development
+## 🔐 Funcionalidades
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the documentation changes locally. To install, use the following command
+- **Autenticação de Usuários:** login, cadastro e recuperação de senha com segurança e performance.
+- **2FA (Autenticação em Dois Fatores):** suporte completo a autenticação por token temporário (TOTP).
+- **Gestão de Sessões:** controle e invalidação de sessões, logout remoto e mais.
+- **APIs REST e SDKs:** integração simples com exemplos práticos.
+- **Documentação Direta e Clara:** tudo o que você precisa para começar em minutos.
 
-```
-npm i -g mintlify
-```
+## 🚀 Como Começar
 
-Run the following command at the root of your documentation (where docs.json is)
+1. Crie uma conta em [simpleAPI.com.br](https://www.simpleapi.com.br).
+2. Obtenha sua chave de API.
+3. Consulte a [documentação](https://www.simpleapi.com.br/swagger/index.html) e comece a integração.
+4. Configure fluxos de login, registro e verificação em dois fatores com poucos passos.
 
-```
-mintlify dev
-```
+## 📦 Em breve
 
-### Publishing Changes
+- Webhooks para eventos de autenticação
+- Login social (Google, GitHub, etc.)
 
-Install our Github App to auto propagate changes from your repo to your deployment. Changes will be deployed to production automatically after pushing to the default branch. Find the link to install on your dashboard. 
+## 🤝 Contribuindo
 
-#### Troubleshooting
+Este repositório é o ponto de partida para a plataforma simpleAPI. Se você tem sugestões, ideias ou quer colaborar com integrações, fique à vontade para abrir uma issue ou entrar em contato!
 
-- Mintlify dev isn't running - Run `mintlify install` it'll re-install dependencies.
-- Page loads as a 404 - Make sure you are running in a folder with `docs.json`
+---
+
+<p align="center">
+  Desenvolvido por <a href="https://www.linkedin.com/in/daniel-silva-1a3209196/">Daniel Silva</a> 🚀
+</p>
