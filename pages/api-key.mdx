@@ -1,0 +1,43 @@
+---
+title: API Key
+icon: 'Key'
+description: "Como gerar e usar sua API Key"
+---
+
+A **API Key** é a forma de autenticação principal utilizada para acessar rotas protegidas do `simpleAPI`. Cada chave é única, associada a um usuário da plataforma, e pode ser gerada diretamente no seu painel após login.
+
+## <Icon icon="Key" type="solid" /> Como obter sua API Key
+
+1. Acesse o [painel do simpleAPI](https://www.simpleapi.com.br).
+2. Faça login com sua conta.
+3. No menu lateral, clique em **API Key**.
+4. Clique em **Gerar chave**.
+
+Uma chave será gerada no formato: sk-rQiYxSxAdIvJpemBGWnxoemdgyHIWQxs
+
+> 🚨 **Importante:**  
+> Guarde sua chave com **segurança**. Ela funciona como uma **senha** e dá acesso total às funcionalidades da sua conta.  
+> Não compartilhe essa chave publicamente e **nunca** a exponha em repositórios ou arquivos de frontend.
+
+## <Icon icon="LockOpen" type="solid" /> Como usar a API Key
+
+A API Key deve ser enviada no cabeçalho (`header`) da sua requisição HTTP, no padrão **Authorization: Bearer**.
+
+### Exemplo de requisição
+
+```http
+GET /client/user HTTP/1.1
+Host: api.simpleapi.com.br
+Authorization: Bearer sk-rQiYxSxAdIvJpemBGWnxoemdgyHIWQxs
+```
+
+
+## <Icon icon="ShieldCheck" type="solid" /> Segurança e limites
+
+- Cada requisição feita com sua chave reduz sua cota de uso, conforme o plano escolhido.
+- O uso da chave é monitorado.
+- Você pode revogar e regenerar sua chave a qualquer momento pelo painel.
+
+<p align="center">
+  Dúvidas? Fale com a gente no <a href="mailto:suporte@simpleapi.com.br">suporte@simpleapi.com.br</a>
+</p>

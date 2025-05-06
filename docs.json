@@ -16,7 +16,8 @@
           {
             "group": "Introdução",
             "pages": [
-              "pages/intro"
+              "pages/intro",
+              "pages/api-key"
             ]
           }
         ]

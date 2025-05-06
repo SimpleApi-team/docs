@@ -7,138 +7,6 @@ info:
 servers:
 - url: /
 paths:
-  /api-key/{userId}:
-    post:
-      tags:
-      - API Key
-      summary: Generate API Key
-      description: Generates a new API key for the authenticated user
-      parameters:
-      - name: Authorization
-        in: header
-        description: Authorization
-        required: true
-        schema:
-          type: string
-      - name: userId
-        in: path
-        description: User ID
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: API Key generated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apikey.APIKeyResponse'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "401":
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-    delete:
-      tags:
-      - API Key
-      summary: Delete API Key
-      description: Deletes an existing API key
-      parameters:
-      - name: Authorization
-        in: header
-        description: Authorization
-        required: true
-        schema:
-          type: string
-      - name: userId
-        in: path
-        description: User ID
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: API key deleted successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/apikey.DeleteAPIKeyResponse'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "404":
-          description: API key not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      - ApiKeyAuth: []
-  /auth/login:
-    post:
-      tags:
-      - Auth
-      summary: User login
-      description: Authenticates a user and returns a JWT token if the credentials
-        are correct. The token expires in 06 hours.
-      requestBody:
-        description: Auth details
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/auth.AuthUserRequest'
-        required: true
-      responses:
-        "200":
-          description: JWT token generated successfully. Token expires in 06 hours.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/auth.AuthResponse'
-        "400":
-          description: Invalid input
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "401":
-          description: Invalid credentials
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Failed to generate token
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      x-codegen-request-body-name: user
   /client/user:
     post:
       tags:
@@ -147,9 +15,9 @@ paths:
       description: Creates a new user associated with the authenticated client's API
         key
       parameters:
-      - name: api-key
+      - name: Authorization
         in: header
-        description: api-key
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
         required: true
         schema:
           type: string
@@ -182,6 +50,104 @@ paths:
       security:
       - ApiKeyAuth: []
       x-codegen-request-body-name: clientUser
+  /client/user/auth/login:
+    post:
+      tags:
+      - Client Users
+      summary: Client User login
+      description: Authenticates a user and returns a JWT token if the credentials
+        are correct. The token expires in 02 hours.
+      parameters:
+      - name: Authorization
+        in: header
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Auth details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/client.AuthUserRequest'
+        required: true
+      responses:
+        "200":
+          description: JWT token generated successfully. Token expires in 02 hours.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auth.AuthResponse'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+        "500":
+          description: Failed to generate token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-codegen-request-body-name: user
+  /client/user/auth/validation-token:
+    post:
+      tags:
+      - Client Users
+      summary: Validate JWT token
+      description: "Validates the provided JWT token and confirms it is active. Example\
+        \ body request: \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
+      parameters:
+      - name: Authorization
+        in: header
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Auth details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/client.LoginClientUserRequest'
+        required: true
+      responses:
+        "200":
+          description: JWT token is valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.SuccessWithMsgResponse'
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+        "500":
+          description: Failed to valid token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      x-codegen-request-body-name: user
   /client/user/{id}:
     get:
       tags:
@@ -190,9 +156,9 @@ paths:
       description: "Retrieves the details of a client user using their ID, associated\
         \ with the authenticated client's API key"
       parameters:
-      - name: api-key
+      - name: Authorization
         in: header
-        description: api-key
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
         required: true
         schema:
           type: string
@@ -235,9 +201,9 @@ paths:
       summary: Update an existing client user
       description: Updates the authenticated client's user data. Password is optional.
       parameters:
-      - name: api-key
+      - name: Authorization
         in: header
-        description: api-key
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
         required: true
         schema:
           type: string
@@ -295,9 +261,9 @@ paths:
       description: Deletes a user by ID associated with the authenticated client's
         API key
       parameters:
-      - name: api-key
+      - name: Authorization
         in: header
-        description: api-key
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
         required: true
         schema:
           type: string
@@ -336,9 +302,9 @@ paths:
       description: "Retrieves a list of all client users associated with the authenticated\
         \ client's API key, with pagination support"
       parameters:
-      - name: api-key
+      - name: Authorization
         in: header
-        description: api-key
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
         required: true
         schema:
           type: string
@@ -400,133 +366,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-  /user:
-    post:
-      tags:
-      - Users
-      summary: Create a new user
-      description: Creates a new user in the system
-      requestBody:
-        description: User details
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/users.CreateUserRequest'
-        required: true
-      responses:
-        "201":
-          description: Created user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/users.UserResponse'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      x-codegen-request-body-name: user
-  /user/{id}:
-    get:
-      tags:
-      - Users
-      summary: Get user by ID
-      description: Retrieves a user from the system based on their unique ID
-      parameters:
-      - name: id
-        in: path
-        description: User ID
-        required: true
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        description: Authorization
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: User found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/users.UserResponse'
-        "404":
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-    put:
-      tags:
-      - Users
-      summary: Update user details
-      description: Updates the specified fields of a user
-      parameters:
-      - name: id
-        in: path
-        description: User ID
-        required: true
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        description: Authorization
-        required: true
-        schema:
-          type: string
-      requestBody:
-        description: Fields to update
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/users.UpdateUserRequest'
-        required: true
-      responses:
-        "200":
-          description: Updated user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/users.UserResponse'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "404":
-          description: User not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      x-codegen-request-body-name: user
-  /user/{id}/deactivate:
+
     put:
       tags:
       - Users
@@ -604,6 +444,17 @@ components:
       properties:
         token:
           type: string
+    client.AuthUserRequest:
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          minLength: 6
+          type: string
     client.ClientUserResponse:
       type: object
       properties:
@@ -650,6 +501,14 @@ components:
           type: array
           items:
             type: string
+    client.LoginClientUserRequest:
+      required:
+      - token
+      type: object
+      properties:
+        token:
+          minLength: 6
+          type: string
     client.PaginatedClientUsersResponse:
       type: object
       properties:
@@ -689,6 +548,27 @@ components:
           maxLength: 100
           minLength: 6
           type: string
+    users.ResendVerificationCodeRequest:
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+    users.ResetPasswordRequest:
+      required:
+      - code
+      - email
+      type: object
+      properties:
+        code:
+          type: string
+        email:
+          type: string
+        password:
+          maxLength: 100
+          minLength: 6
+          type: string
     users.UpdateUserRequest:
       type: object
       properties:
@@ -718,6 +598,8 @@ components:
           type: string
         is_active:
           type: boolean
+        is_email_verified:
+          type: boolean
         name:
           type: string
         plan_expiration_date:
@@ -728,6 +610,16 @@ components:
           type: string
         usage_limits:
           $ref: '#/components/schemas/users.UsageLimitsResponse'
+    users.VerifyEmailRequest:
+      required:
+      - code
+      - email
+      type: object
+      properties:
+        code:
+          type: string
+        email:
+          type: string
     utils.ErrorResponse:
       type: object
       properties:
