@@ -19,6 +19,17 @@
               "pages/intro",
               "pages/api-key"
             ]
+          },
+          {
+            "group": "Autenticação e Gestão de Cliente",
+            "pages": [
+               "pages/client/referance",
+               "pages/client/create",
+               "pages/client/listOne",
+               "pages/client/ListAll",
+               "pages/client/update",
+               "pages/client/delete"
+            ]
           }
         ]
       },

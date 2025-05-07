@@ -1,0 +1,72 @@
+---
+title: 'Referência'
+description: 'Gerencie seus usuários finais (Client Users) com nossa API.'
+icon: 'users'
+---
+
+Um **Client User** representa um usuário final vinculado à sua conta de API. Ele pode ser autenticado com e-mail e senha ou 2FA, e é quem você gerencia internamente para acessar seus serviços.
+
+##  🌳 Estrutura esperada
+
+### Objeto de criação (POST `/client/user`)
+
+```json
+{
+  "name": "Maria Oliveira",
+  "email": "maria@email.com",
+  "password": "senha456",
+  "roles": ["viewer", "adm"],
+  "metadata": {
+    "field": "abcde",
+    "field2": "abcde",
+    "field3": "abcde",
+    "field4": "abcde",
+    "field5": "abcde"
+  }
+}
+```
+- name: Nome do usuário (string, obrigatório)
+
+- email: E-mail único do usuário (string, obrigatório)
+
+- password: Senha para autenticação (string, obrigatório na criação)
+
+- roles: Lista com permissões/níveis de acesso (máx: 100 caracteres)
+
+- metadata: Até 5 campos personalizados com qualquer chave/valor útil
+
+<Tip title="Email único" > Cada Client User deve ter um e-mail único vinculado à sua conta. </Tip>
+
+### Atualização de usuário (PUT /client/user/{id})
+
+O corpo da requisição é igual ao da criação, com as seguintes diferenças:
+
+- password é opcional.
+
+- Os campos enviados substituirão os dados atuais. Sempre envie o modelo completo.
+
+```json
+{
+  "name": "Maria Oliveira",
+  "email": "maria@email.com",
+  "roles": ["viewer", "adm"],
+  "metadata": {
+    "field": "abcde",
+    "field2": "abcde",
+    "field3": "abcde",
+    "field4": "abcde",
+    "field5": "abcde"
+  }
+}
+```
+
+### Outras operações
+
+- `GET /client/user:` Lista todos os usuários vinculados à sua conta.
+Suporta paginação via parâmetros page e limit.
+
+- `GET /client/user/{id}:` Retorna os dados de um usuário específico.
+
+- `DELETE /client/user/{id}:` Remove permanentemente um usuário da sua conta.
+
+<Tip title="Requisições protegidas por API Key" icon="book" horizontal> Essas rotas exigem o uso de uma chave de API válida no header: <code>Authorization: Bearer SUA_API_KEY</code> </Tip>

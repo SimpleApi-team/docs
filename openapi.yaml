@@ -366,47 +366,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-
-    put:
-      tags:
-      - Users
-      summary: Deactivate a user
-      description: Deactivates a user by setting the isActive field to false and updating
-        the updatedAt field
-      parameters:
-      - name: id
-        in: path
-        description: User ID
-        required: true
-        schema:
-          type: string
-      - name: Authorization
-        in: header
-        description: Authorization
-        required: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: User deactivated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.SuccessResponse'
-        "400":
-          description: Invalid user ID
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Failed to deactivate user
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
 components:
   schemas:
     apikey.APIKeyResponse:
