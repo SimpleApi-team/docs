@@ -433,24 +433,33 @@ components:
       - email
       type: object
       properties:
-        email:
-          type: string
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
         name:
           maxLength: 50
           minLength: 2
           type: string
+          example: Maria Oliveira
+        email:
+          type: string
+          format: email
+          example: maria@email.com
         password:
           maxLength: 100
           minLength: 6
           type: string
+          example: senha456
         roles:
           type: array
           items:
             type: string
+          example: ["viewer", "adm"]
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            field: "abcde"
+            field1: "abcde"
+            field2: "abcde"
     client.LoginClientUserRequest:
       required:
       - token
