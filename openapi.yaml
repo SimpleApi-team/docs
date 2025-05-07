@@ -286,7 +286,7 @@ paths:
                 $ref: '#/components/schemas/utils.ErrorResponse'
       security:
       - ApiKeyAuth: []
-  /client/users:
+  /client/user:
     get:
       tags:
       - Client Users
