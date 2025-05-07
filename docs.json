@@ -21,7 +21,7 @@
             ]
           },
           {
-            "group": "Autenticação e Gestão de Cliente",
+            "group": "Gerenciamento de Clientes",
             "pages": [
                "pages/client/referance",
                "pages/client/create",
@@ -29,6 +29,14 @@
                "pages/client/listAll",
                "pages/client/update",
                "pages/client/delete"
+            ]
+          },          
+          {
+            "group": "Autenticação de Clientes",
+            "pages": [
+              "pages/client/auth/referance",
+              "pages/client/auth/login",
+              "pages/client/auth/validationToken"
             ]
           }
         ]

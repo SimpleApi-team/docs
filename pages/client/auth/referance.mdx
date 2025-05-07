@@ -1,0 +1,41 @@
+---
+title: 'Referência'
+description: 'Autentique e valide usuários finais (Client Users) com nossa API.'
+icon: 'lock'
+---
+
+Um **Client User** representa um usuário final vinculado à sua conta. A autenticação desses usuários permite controlar o acesso aos seus serviços com segurança, usando e-mail e senha, e tokens de acesso.
+
+## 🔐 Autenticação de Usuário
+
+### Objeto de Login (POST `/client/user/auth/login`)
+
+Essa rota autentica um usuário com e-mail e senha e retorna um token de acesso (JWT) válido.
+
+#### Corpo da requisição:
+
+```json
+{
+  "email": "maria@email.com",
+  "password": "senha456",
+}
+```
+- email: E-mail do usuário cadastrado (string, obrigatório)
+
+- password: Senha de autenticação (string, obrigatório)
+
+### Validação de Token (POST `/client/user/auth/validation-token`)
+
+Essa rota valida se o token JWT fornecido ainda é válido e retorna os dados do usuário autenticado.
+
+#### Corpo da requisição:
+
+```json
+{
+  "token": "Bearer <TOKEN>"
+}
+```
+
+<Tip title="Validação rápida" icon="shield"> Use esta rota para validar sessões em seus sistemas ou renovar tokens quando necessário. </Tip>
+
+<Tip title="Requisições protegidas por API Key" icon="book" horizontal> Essas rotas exigem o uso de uma chave de API válida no header: <code>Authorization: Bearer SUA_API_KEY</code> </Tip>
