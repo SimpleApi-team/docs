@@ -11,39 +11,38 @@ paths:
     get:
       tags:
       - Client Users
-      summary: Get all client users by ownerId
-      description: "Retrieves a list of all client users associated with the authenticated\
-        \ client's API key, with pagination support"
+      summary: Obter todos os usuários do cliente por ownerId
+      description: "Recupera uma lista de todos os usuários do cliente associados à chave de API do cliente autenticado, com suporte a paginação"
       security:
         - bearerAuth: []
       parameters:
       - name: page
         in: query
-        description: Page number
+        description: Número da página
         schema:
           type: integer
           default: 1
       - name: limit
         in: query
-        description: Number of users per page
+        description: Quantidade de usuários por página
         schema:
           type: integer
           default: 10
       responses:
         "200":
-          description: List of client users
+          description: Lista de usuários do cliente
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/client.PaginatedClientUsersResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
@@ -51,12 +50,12 @@ paths:
     post:
       tags:
       - Client Users
-      summary: Create a new client user
-      description: Creates a new user associated with the authenticated client's API key
+      summary: Criar um novo usuário de cliente
+      description: Cria um novo usuário associado à chave de API do cliente autenticado
       security:
         - bearerAuth: []
       requestBody:
-        description: Client user details
+        description: Detalhes do usuário do cliente
         content:
           application/json:
             schema:
@@ -64,19 +63,19 @@ paths:
         required: true
       responses:
         "201":
-          description: Created client user
+          description: Usuário do cliente criado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/client.ClientUserResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
@@ -85,13 +84,12 @@ paths:
     post:
       tags:
       - Client Users
-      summary: Client User login
-      description: Authenticates a user and returns a JWT token if the credentials
-        are correct. The token expires in 02 hours.
+      summary: Login do usuário do cliente
+      description: Autentica um usuário e retorna um token JWT se as credenciais estiverem corretas. O token expira em 2 horas.
       security:
         - bearerAuth: []
       requestBody:
-        description: Auth details
+        description: Dados de autenticação
         content:
           application/json:
             schema:
@@ -99,25 +97,25 @@ paths:
         required: true
       responses:
         "200":
-          description: JWT token generated successfully. Token expires in 02 hours.
+          description: Token JWT gerado com sucesso. Expira em 2 horas.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/auth.AuthResponse'
         "400":
-          description: Invalid input
+          description: Entrada inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "401":
-          description: Invalid credentials
+          description: Credenciais inválidas
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Failed to generate token
+          description: Falha ao gerar o token
           content:
             application/json:
               schema:
@@ -126,13 +124,12 @@ paths:
     post:
       tags:
       - Client Users
-      summary: Validate JWT token
-      description: "Validates the provided JWT token and confirms it is active. Example\
-        \ body request: \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
+      summary: Validar token JWT
+      description: "Valida o token JWT fornecido e confirma se está ativo. Exemplo de corpo da requisição: \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
       security:
         - bearerAuth: []
       requestBody:
-        description: Auth details
+        description: Dados de autenticação
         content:
           application/json:
             schema:
@@ -140,25 +137,25 @@ paths:
         required: true
       responses:
         "200":
-          description: JWT token is valid.
+          description: Token JWT é válido.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.SuccessWithMsgResponse'
         "400":
-          description: Invalid input
+          description: Entrada inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "401":
-          description: Invalid credentials
+          description: Credenciais inválidas
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Failed to valid token
+          description: Falha ao validar o token
           content:
             application/json:
               schema:
@@ -167,39 +164,38 @@ paths:
     get:
       tags:
       - Client Users
-      summary: Get a client user by ID
-      description: "Retrieves the details of a client user using their ID, associated\
-        \ with the authenticated client's API key"
+      summary: Obter um usuário do cliente por ID
+      description: "Recupera os detalhes de um usuário do cliente utilizando seu ID, associado à chave de API do cliente autenticado"
       security:
         - bearerAuth: []
       parameters:
       - name: id
         in: path
-        description: Client user ID
+        description: ID do usuário do cliente
         required: true
         schema:
           type: string
       responses:
         "200":
-          description: Client user data
+          description: Dados do usuário do cliente
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/client.ClientUserResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "404":
-          description: User not found
+          description: Usuário não encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
@@ -207,19 +203,19 @@ paths:
     put:
       tags:
       - Client Users
-      summary: Update an existing client user
-      description: Updates the authenticated client's user data. Password is optional.
+      summary: Atualizar um usuário do cliente existente
+      description: Atualiza os dados do usuário do cliente autenticado. A senha é opcional.
       security:
         - bearerAuth: []
       parameters:
       - name: id
         in: path
-        description: User ID
+        description: ID do usuário
         required: true
         schema:
           type: string
       requestBody:
-        description: Updated client user details
+        description: Dados atualizados do usuário do cliente
         content:
           application/json:
             schema:
@@ -227,31 +223,31 @@ paths:
         required: true
       responses:
         "200":
-          description: Updated client user
+          description: Usuário do cliente atualizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/client.ClientUserResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "401":
-          description: Unauthorized
+          description: Não autorizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "403":
-          description: Forbidden
+          description: Acesso proibido
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
@@ -259,33 +255,32 @@ paths:
     delete:
       tags:
       - Client Users
-      summary: Delete a client user
-      description: Deletes a user by ID associated with the authenticated client's
-        API key
+      summary: Excluir um usuário do cliente
+      description: Exclui um usuário pelo ID associado à chave de API do cliente autenticado
       security:
         - bearerAuth: []
       parameters:
       - name: id
         in: path
-        description: User ID
+        description: ID do usuário
         required: true
         schema:
           type: string
       responses:
         "200":
-          description: User deleted successfully
+          description: Usuário excluído com sucesso
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.SuccessWithMsgResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
@@ -294,23 +289,23 @@ paths:
     get:
       tags:
       - Status
-      summary: Get the status of the API
-      description: "Returns a simple status message indicating the API is running,"
+      summary: Obter o status da API
+      description: Retorna uma mensagem simples de status indicando que a API está em execução.
       responses:
         "200":
-          description: API status
+          description: Status da API
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/status.StatusResponse'
         "400":
-          description: Bad request
+          description: Requisição inválida
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
         "500":
-          description: Internal server error
+          description: Erro interno do servidor
           content:
             application/json:
               schema:
