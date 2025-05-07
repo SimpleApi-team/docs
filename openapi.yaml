@@ -15,7 +15,6 @@ paths:
       description: Creates a new user associated with the authenticated client's API key
       security:
         - ApiKeyAuth: []
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
       requestBody:
         required: true
         description: Client user details
@@ -630,5 +629,6 @@ components:
     ApiKeyAuth:
       type: apiKey
       name: Authorization
+      description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
       in: header
 x-original-swagger-version: "2.0"
