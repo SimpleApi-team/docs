@@ -13,49 +13,13 @@ paths:
       - Client Users
       summary: Create a new client user
       description: Creates a new user associated with the authenticated client's API key
-      security:
-        - ApiKeyAuth: []
       requestBody:
-        required: true
         description: Client user details
         content:
           application/json:
             schema:
-              type: object
-              description: "Dados necessários para criar um novo usuário (client user) associado à sua conta. Esses dados são usados para registrar o cliente no sistema."
-              required: ['email']
-              additionalProperties: false
-              properties:
-                name:
-                  type: string
-                  description: Nome completo do seu cliente
-                  example: Maria Silva
-                email:
-                  type: string
-                  description: Email valido do seu cliente
-                  example: maria@gmail.com
-                password:
-                  type: string
-                  description: Password do seu cliente para autenticação
-                  example: Maria Silva
-                metadata:
-                  type: array
-                  description: Lista de permissões do usuário. Pode conter até 100 caracteres no total.
-                  items:
-                    type: string
-                    example: viewer
-                roles:
-                  type: object
-                  description: Metadados personalizados do usuário. Até 5 campos são permitidos.
-                  example: Maria Silva
-                  additionalProperties:
-                    type: string
-                  example:
-                    field: "abcde"
-                    field1: "abcde"
-                    field2: "abcde"
-                    field3: "abcde"
-                    field4: "abcde"
+              $ref: '#/components/schemas/client.CreateClientUserRequest'
+        required: true
       responses:
         "201":
           description: Created client user
@@ -75,6 +39,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
+      x-codegen-request-body-name: clientUser
   /client/user/auth/login:
     post:
       tags:
@@ -629,6 +597,5 @@ components:
     ApiKeyAuth:
       type: apiKey
       name: Authorization
-      description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
       in: header
 x-original-swagger-version: "2.0"
