@@ -356,13 +356,13 @@ components:
         email:
           type: string
           format: email
-          example: maria@email.com
+          example: "maria@email.com"
         password:
           minLength: 6
           maxLength: 100
           type: string
           type: string
-          example: senha456
+          example: "senha456"
     client.ClientUserResponse:
       type: object
       properties:
@@ -426,7 +426,7 @@ components:
         token:
           minLength: 6
           type: string
-          example: Bearer <TOKEN>
+          example: "Bearer <TOKEN>"
     client.PaginatedClientUsersResponse:
       type: object
       properties:
