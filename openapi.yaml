@@ -5,7 +5,7 @@ info:
   contact: {}
   version: 1.0.0
 servers:
-- url: https://www.simpleapi.com.br/api/v1
+- url: https://simpleapi.com.br/api/v1
 paths:
   /client/user:
     get:
@@ -601,8 +601,8 @@ components:
         successCode:
           type: integer
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: Authorization
-      in: header
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 x-original-swagger-version: "2.0"
