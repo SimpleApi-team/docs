@@ -41,7 +41,6 @@ paths:
                 $ref: '#/components/schemas/utils.ErrorResponse'
       security:
       - ApiKeyAuth: []
-      description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
       x-codegen-request-body-name: clientUser
   /client/user/auth/login:
     post:
