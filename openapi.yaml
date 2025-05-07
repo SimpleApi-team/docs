@@ -17,7 +17,7 @@ paths:
         - ApiKeyAuth: []
         description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
       requestBody:
-        require: true
+        required: true
         description: Client user details
         content:
           application/json:
