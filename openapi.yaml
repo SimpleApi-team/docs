@@ -8,6 +8,52 @@ servers:
 - url: /
 paths:
   /client/user:
+    get:
+      tags:
+      - Client Users
+      summary: Get all client users by ownerId
+      description: "Retrieves a list of all client users associated with the authenticated\
+        \ client's API key, with pagination support"
+      parameters:
+      - name: Authorization
+        in: header
+        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
+        required: true
+        schema:
+          type: string
+      - name: page
+        in: query
+        description: Page number
+        schema:
+          type: integer
+          default: 1
+      - name: limit
+        in: query
+        description: Number of users per page
+        schema:
+          type: integer
+          default: 10
+      responses:
+        "200":
+          description: List of client users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/client.PaginatedClientUsersResponse'
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/utils.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
     post:
       tags:
       - Client Users
@@ -272,53 +318,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.SuccessWithMsgResponse'
-        "400":
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-  /client/user:
-    get:
-      tags:
-      - Client Users
-      summary: Get all client users by ownerId
-      description: "Retrieves a list of all client users associated with the authenticated\
-        \ client's API key, with pagination support"
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
-      - name: page
-        in: query
-        description: Page number
-        schema:
-          type: integer
-          default: 1
-      - name: limit
-        in: query
-        description: Number of users per page
-        schema:
-          type: integer
-          default: 10
-      responses:
-        "200":
-          description: List of client users
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/client.PaginatedClientUsersResponse'
         "400":
           description: Bad request
           content:
