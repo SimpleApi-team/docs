@@ -12,9 +12,11 @@ paths:
       tags:
       - Client Users
       summary: Get all client users by ownerId
-      description: "Retrieves a list of all client users associated with the authenticated client's API key, with pagination support"
+      description: "Retrieves a list of all client users associated with the authenticated\
+        \ client's API key, with pagination support"
       security:
         - bearerAuth: []
+      parameters:
       - name: page
         in: query
         description: Page number
@@ -84,7 +86,8 @@ paths:
       tags:
       - Client Users
       summary: Client User login
-      description: Authenticates a user and returns a JWT token if the credentials are correct. The token expires in 02 hours.
+      description: Authenticates a user and returns a JWT token if the credentials
+        are correct. The token expires in 02 hours.
       security:
         - bearerAuth: []
       requestBody:
@@ -169,6 +172,7 @@ paths:
         \ with the authenticated client's API key"
       security:
         - bearerAuth: []
+      parameters:
       - name: id
         in: path
         description: Client user ID
@@ -207,6 +211,7 @@ paths:
       description: Updates the authenticated client's user data. Password is optional.
       security:
         - bearerAuth: []
+      parameters:
       - name: id
         in: path
         description: User ID
@@ -259,6 +264,7 @@ paths:
         API key
       security:
         - bearerAuth: []
+      parameters:
       - name: id
         in: path
         description: User ID
