@@ -12,15 +12,9 @@ paths:
       tags:
       - Client Users
       summary: Get all client users by ownerId
-      description: "Retrieves a list of all client users associated with the authenticated\
-        \ client's API key, with pagination support"
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      description: "Retrieves a list of all client users associated with the authenticated client's API key, with pagination support"
+      security:
+        - bearerAuth: []
       - name: page
         in: query
         description: Page number
@@ -52,8 +46,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
     post:
       tags:
       - Client Users
@@ -92,15 +84,9 @@ paths:
       tags:
       - Client Users
       summary: Client User login
-      description: Authenticates a user and returns a JWT token if the credentials
-        are correct. The token expires in 02 hours.
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      description: Authenticates a user and returns a JWT token if the credentials are correct. The token expires in 02 hours.
+      security:
+        - bearerAuth: []
       requestBody:
         description: Auth details
         content:
@@ -133,9 +119,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      x-codegen-request-body-name: user
   /client/user/auth/validation-token:
     post:
       tags:
@@ -143,13 +126,8 @@ paths:
       summary: Validate JWT token
       description: "Validates the provided JWT token and confirms it is active. Example\
         \ body request: \"token\": \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\""
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      security:
+        - bearerAuth: []
       requestBody:
         description: Auth details
         content:
@@ -182,9 +160,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      x-codegen-request-body-name: user
   /client/user/{id}:
     get:
       tags:
@@ -192,13 +167,8 @@ paths:
       summary: Get a client user by ID
       description: "Retrieves the details of a client user using their ID, associated\
         \ with the authenticated client's API key"
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      security:
+        - bearerAuth: []
       - name: id
         in: path
         description: Client user ID
@@ -230,20 +200,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
     put:
       tags:
       - Client Users
       summary: Update an existing client user
       description: Updates the authenticated client's user data. Password is optional.
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      security:
+        - bearerAuth: []
       - name: id
         in: path
         description: User ID
@@ -288,22 +251,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      x-codegen-request-body-name: clientUser
     delete:
       tags:
       - Client Users
       summary: Delete a client user
       description: Deletes a user by ID associated with the authenticated client's
         API key
-      parameters:
-      - name: Authorization
-        in: header
-        description: "Bearer token required. Example: 'Bearer sk-abc123XYZ...'"
-        required: true
-        schema:
-          type: string
+      security:
+        - bearerAuth: []
       - name: id
         in: path
         description: User ID
@@ -329,8 +284,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
   /status:
     get:
       tags:
