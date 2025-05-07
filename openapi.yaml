@@ -59,6 +59,8 @@ paths:
       - Client Users
       summary: Create a new client user
       description: Creates a new user associated with the authenticated client's API key
+      security:
+        - bearerAuth: []
       requestBody:
         description: Client user details
         content:
@@ -85,9 +87,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/utils.ErrorResponse'
-      security:
-      - ApiKeyAuth: []
-      x-codegen-request-body-name: clientUser
   /client/user/auth/login:
     post:
       tags:
