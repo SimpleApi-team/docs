@@ -5,7 +5,7 @@ info:
   contact: {}
   version: 1.0.0
 servers:
-- url: /
+- url: https://www.simpleapi.com.br/api/v1
 paths:
   /client/user:
     get:
