@@ -320,6 +320,7 @@ components:
           example: true
         success_code:
           type: integer
+          example: 200
         user:
           $ref: '#/components/schemas/client.ClientUserResponse'
     auth.AuthResponse:
@@ -353,6 +354,7 @@ components:
       properties:
         id:
           type: string
+          example: "68194cb9de0efdd31958a456908"
         email:
           type: string
           example: maria@email.com
