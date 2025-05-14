@@ -141,7 +141,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/utils.SuccessWithMsgResponse'
+                $ref: '#/components/schemas/client.ValidTokenResponse'
         "400":
           description: Entrada inválida
           content:
@@ -312,18 +312,16 @@ paths:
                 $ref: '#/components/schemas/utils.ErrorResponse'
 components:
   schemas:
-    apikey.APIKeyResponse:
+    client.ValidTokenResponse:
       type: object
       properties:
-        apiKey:
-          type: string
-        message:
-          type: string
-    apikey.DeleteAPIKeyResponse:
-      type: object
-      properties:
-        message:
-          type: string
+        isValid:
+          type: boolean
+          example: true
+        success_code:
+          type: integer
+        user:
+          $ref: '#/components/schemas/client.ClientUserResponse'
     auth.AuthResponse:
       type: object
       properties:
@@ -331,22 +329,12 @@ components:
           $ref: '#/components/schemas/auth.Token'
         success_code:
           type: integer
-    auth.AuthUserRequest:
-      required:
-      - email
-      - password
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          minLength: 6
-          type: string
     auth.Token:
       type: object
       properties:
         token:
           type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDY2NTM2NTUsInVzZXJfaWQiOiI2ODE5NGNiOWRlMGVmZGQzMTk1OGE3ODEifQ
     client.AuthUserRequest:
       required:
       - email
@@ -355,32 +343,44 @@ components:
       properties:
         email:
           type: string
+          example: maria@email.com
         password:
           minLength: 6
           type: string
+          example: abcd1234
     client.ClientUserResponse:
       type: object
       properties:
-        created_at:
+        id:
           type: string
         email:
           type: string
-        id:
-          type: string
-        is_active:
-          type: boolean
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
+          example: maria@email.com
         name:
           type: string
+          example: Maria Oliveira
         roles:
           type: array
           items:
             type: string
+          example: ["viewer", "adm"]
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            field: "abcde"
+            field1: "abcde"
+            field2: "abcde"
+        is_active:
+          type: boolean
+          example: true
+        created_at:
+          type: string
+          example: "2025-05-05T23:41:45.619Z"
         updated_at:
           type: string
+          example: "2025-05-05T23:41:45.619Z"
     client.CreateClientUserRequest:
       required:
       - email
@@ -421,6 +421,7 @@ components:
         token:
           minLength: 6
           type: string
+          example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDY2NTM2NTUsInVzZXJfaWQiOiI2ODE5NGNiOWRlMGVmZGQzMTk1OGE3ODEifQ.n-S2PChM2pFXNfOwq0lfjfNMFIkCfvaPoTUby_MhS84"
     client.PaginatedClientUsersResponse:
       type: object
       properties:
@@ -430,10 +431,13 @@ components:
             $ref: '#/components/schemas/client.ClientUserResponse'
         limit:
           type: integer
+          example: 20
         page:
           type: integer
+          example: 1
         total:
           type: integer
+          example: 10
     status.StatusResponse:
       type: object
       properties:
@@ -443,95 +447,6 @@ components:
           type: string
         databaseStatus:
           type: string
-    users.CreateUserRequest:
-      required:
-      - email
-      - name
-      - password
-      type: object
-      properties:
-        email:
-          type: string
-        name:
-          maxLength: 50
-          minLength: 3
-          type: string
-        password:
-          maxLength: 100
-          minLength: 6
-          type: string
-    users.ResendVerificationCodeRequest:
-      required:
-      - email
-      type: object
-      properties:
-        email:
-          type: string
-    users.ResetPasswordRequest:
-      required:
-      - code
-      - email
-      type: object
-      properties:
-        code:
-          type: string
-        email:
-          type: string
-        password:
-          maxLength: 100
-          minLength: 6
-          type: string
-    users.UpdateUserRequest:
-      type: object
-      properties:
-        isActive:
-          type: boolean
-        name:
-          maxLength: 50
-          minLength: 2
-          type: string
-        password:
-          maxLength: 100
-          minLength: 6
-          type: string
-    users.UsageLimitsResponse:
-      type: object
-      properties:
-        api_requests:
-          type: integer
-    users.UserResponse:
-      type: object
-      properties:
-        created_at:
-          type: string
-        email:
-          type: string
-        id:
-          type: string
-        is_active:
-          type: boolean
-        is_email_verified:
-          type: boolean
-        name:
-          type: string
-        plan_expiration_date:
-          type: string
-        plan_type:
-          type: string
-        updated_at:
-          type: string
-        usage_limits:
-          $ref: '#/components/schemas/users.UsageLimitsResponse'
-    users.VerifyEmailRequest:
-      required:
-      - code
-      - email
-      type: object
-      properties:
-        code:
-          type: string
-        email:
-          type: string
     utils.ErrorResponse:
       type: object
       properties:
@@ -539,18 +454,13 @@ components:
           type: integer
         message:
           type: string
-    utils.SuccessResponse:
-      type: object
-      properties:
-        data:
-          type: object
-        success_code:
-          type: integer
+          example: "Invalid request"
     utils.SuccessWithMsgResponse:
       type: object
       properties:
         message:
           type: string
+          example: "Query successfully completed"
         successCode:
           type: integer
   securitySchemes:
