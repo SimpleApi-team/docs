@@ -2,36 +2,40 @@
   <img src="./logo/simple.png" alt="Logo do SimpleAPI" height="200"/>
 </p>
 
-**simpleAPI** é uma plataforma moderna de autenticação de usuários, projetada para desenvolvedores que buscam integrar login seguro, autenticação em dois fatores (2FA) e gestão de usuários com facilidade e agilidade.
+**simpleAPI** é uma plataforma criada para ajudar desenvolvedores, startups e pequenas empresas a **simplificar a adequação à LGPD**.
 
-Com APIs claras, documentação objetiva e uma experiência pensada para escalar, o simpleAPI oferece uma base sólida para aplicações modernas — seja para produtos SaaS, aplicativos mobile ou sistemas corporativos.
+Com ferramentas simples de integrar, documentação clara e foco em privacidade e compliance, o simpleAPI ajuda empresas a implementar práticas de conformidade e manter registros auditáveis sem precisar construir tudo do zero.
 
-## 🔐 Funcionalidades
+## 🛡️ O que o simpleAPI oferece
 
-- **Autenticação de Usuários:** login, cadastro e recuperação de senha com segurança e performance.
-- **2FA (Autenticação em Dois Fatores):** suporte completo a autenticação por token temporário (TOTP).
-- **Gestão de Sessões:** controle e invalidação de sessões, logout remoto e mais.
-- **APIs REST e SDKs:** integração simples com exemplos práticos.
-- **Documentação Direta e Clara:** tudo o que você precisa para começar em minutos.
+- **Consentimento de cookies:** banner e registro de consentimentos de usuários.
+- **Evidências de privacidade:** histórico e registros para auditoria.
+- **Políticas de privacidade:** geração e gestão relacionada à LGPD.
+- **Integração simples:** script e APIs pensados para desenvolvedores.
+- **Dashboard de compliance:** visão organizada das evidências de conformidade.
 
-## 🚀 Como Começar
+## 🚀 Como começar
 
-1. Crie uma conta em [simpleAPI.com.br](https://www.simpleapi.com.br).
-2. Obtenha sua chave de API.
-3. Consulte a [documentação](https://www.simpleapi.com.br/swagger/index.html) e comece a integração.
-4. Configure fluxos de login, registro e verificação em dois fatores com poucos passos.
+1. Crie sua conta em [simpleapi.com.br](https://www.simpleapi.com.br).
+2. Registre seu site na plataforma.
+3. Adicione o script de integração no seu site.
+4. Comece a registrar consentimentos automaticamente.
 
-## 📦 Em breve
+Consulte a documentação na aba **Documentação** para os detalhes de integração.
 
-- Webhooks para eventos de autenticação
-- Login social (Google, GitHub, etc.)
+## 📦 Em evolução
+
+- Ferramentas avançadas de auditoria
+- Exportação de registros de consentimento
+- Integrações com outras plataformas
+- Automações para gestão de privacidade
 
 ## 🤝 Contribuindo
 
-Este repositório é o ponto de partida para a plataforma simpleAPI. Se você tem sugestões, ideias ou quer colaborar com integrações, fique à vontade para abrir uma issue ou entrar em contato!
+Este repositório contém a documentação da plataforma simpleAPI. Sugestões e contribuições são bem-vindas — abra uma issue ou entre em contato!
 
 ---
 
 <p align="center">
-  Desenvolvido por <a href="https://www.linkedin.com/in/daniel-silva-1a3209196/">Daniel Silva</a> 🚀
+  Desenvolvido com 💙 por Daniel Silva
 </p>

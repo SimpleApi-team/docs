@@ -19,25 +19,6 @@
               "pages/intro",
               "pages/api-key"
             ]
-          },
-          {
-            "group": "Gerenciamento de Clientes",
-            "pages": [
-               "pages/client/referance",
-               "pages/client/create",
-               "pages/client/listOne",
-               "pages/client/listAll",
-               "pages/client/update",
-               "pages/client/delete"
-            ]
-          },          
-          {
-            "group": "Autenticação de Clientes",
-            "pages": [
-              "pages/client/auth/referance",
-              "pages/client/auth/login",
-              "pages/client/auth/validationToken"
-            ]
           }
         ]
       },
