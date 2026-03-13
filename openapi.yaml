@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
-  title: SimpleAPI
-  description: API do simpleAPI — plataforma para simplificar a adequação à LGPD.
+  title: HaldenHub
+  description: API do HaldenHub — plataforma para simplificar a adequação à LGPD.
   contact: {}
   version: 1.0.0
 servers:
-- url: https://simpleapi.com.br/api/v1
+- url: https://www.haldenhub.com.br/api/v1
 paths:
   /status:
     get:

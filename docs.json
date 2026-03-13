@@ -1,13 +1,13 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "SimpleAPI",
+  "name": "HaldenHub",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.png",
+  "favicon": "/HaldenhubLogo.png",
   "navigation": {
     "tabs": [
       {
@@ -29,8 +29,8 @@
     ]
   },
   "logo": {
-    "light": "/logo/simple.png",
-    "dark": "/logo/simple.png"
+    "light": "/HaldenhubLogo.png",
+    "dark": "/HaldenhubLogo.png"
   },
   "navbar": {
     "links": [
@@ -42,12 +42,12 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://www.simpleapi.com.br/"
+      "href": "https://www.haldenhub.com.br/"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/simpleAPI",
+      "x": "https://x.com/HaldenHub",
       "github": "https://github.com/SimpleApi-team",
       "linkedin": "https://www.linkedin.com/in/daniel-silva-1a3209196/"
     }
